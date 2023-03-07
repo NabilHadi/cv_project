@@ -5,12 +5,12 @@ export function getSectionsAndFields() {
     personalDetailsSection: {
       sectionId: uniqid(),
       sectionName: "Personal Details",
-      fields: [["nameField", "emailField", "phoneNumberField"]],
+      fieldNames: [["nameField", "emailField", "phoneNumberField"]],
     },
-    educationalSectopn: {
+    educationalSection: {
       sectionId: uniqid(),
       sectionName: "Educational",
-      fields: [["schoolNameField", "degreeNameField"]],
+      fieldNames: [["schoolNameField", "degreeNameField"]],
     },
     fields: {
       nameField: {
