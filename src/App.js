@@ -1,6 +1,10 @@
 import { Component } from "react";
 import FormFieldset from "./components/FormFieldset";
-import { getSectionsAndFields, createEducationalFieldGroup } from "./utilities";
+import {
+  getSectionsAndFields,
+  createEducationalFieldGroup,
+  createExperienceFieldGroup,
+} from "./utilities";
 
 /*
 App state: {
@@ -53,6 +57,8 @@ class App extends Component {
     this.getFieldByName = this.getFieldByName.bind(this);
     this.getFieldGroup = this.getFieldGroup.bind(this);
     this.addNewEducationFieldGroup = this.addNewEducationFieldGroup.bind(this);
+    this.addNewExperienceFieldGroup =
+      this.addNewExperienceFieldGroup.bind(this);
   }
 
   changeField(fieldId, newValue) {
@@ -104,6 +110,29 @@ class App extends Component {
     });
   }
 
+  addNewExperienceFieldGroup() {
+    const experienceFieldGroup = createExperienceFieldGroup();
+    this.setState({
+      experienceSection: {
+        ...this.state.experienceSection,
+        fieldGroups: [
+          ...this.state.experienceSection.fieldGroups,
+          experienceFieldGroup.fieldGroupName,
+        ],
+      },
+      fieldGroups: {
+        ...this.state.fieldGroups,
+        [experienceFieldGroup.fieldGroupName]: [
+          ...Object.keys(experienceFieldGroup.fields),
+        ],
+      },
+      fields: {
+        ...this.state.fields,
+        ...experienceFieldGroup.fields,
+      },
+    });
+  }
+
   render() {
     return (
       <div className="App">
@@ -120,8 +149,17 @@ class App extends Component {
             getFieldGroup={this.getFieldGroup}
             onFieldChange={this.changeField}
           />
+          <FormFieldset
+            section={this.state.experienceSection}
+            getField={this.getFieldByName}
+            getFieldGroup={this.getFieldGroup}
+            onFieldChange={this.changeField}
+          />
         </form>
         <button onClick={this.addNewEducationFieldGroup}>add education</button>
+        <button onClick={this.addNewExperienceFieldGroup}>
+          add experience
+        </button>
         <br />
         <br />
         {Object.values(this.state.fields).map((field) => {

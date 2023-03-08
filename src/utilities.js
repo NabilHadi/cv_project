@@ -1,5 +1,49 @@
 import uniqid from "uniqid";
 
+export function createExperienceFieldGroup() {
+  const id = uniqid();
+  return {
+    fieldGroupName: "experienceFieldGroup-" + id,
+    fields: {
+      ["compnayNameField-" + id]: {
+        fieldId: uniqid(),
+        name: "compnayName-" + id,
+        label: "Compnay Name",
+        value: "",
+        type: "text",
+      },
+      ["positionTitleField-" + id]: {
+        fieldId: uniqid(),
+        name: "positionTitle-" + id,
+        label: "Position Title",
+        value: "",
+        type: "text",
+      },
+      ["descriptionField-" + id]: {
+        fieldId: uniqid(),
+        name: "description-" + id,
+        label: "description",
+        value: "",
+        type: "text",
+      },
+      ["startDateField-" + id]: {
+        fieldId: uniqid(),
+        name: "startDate-" + id,
+        label: "Start Date",
+        value: "",
+        type: "text",
+      },
+      ["endDateField-" + id]: {
+        fieldId: uniqid(),
+        name: "endDate-" + id,
+        label: "End Date",
+        value: "",
+        type: "text",
+      },
+    },
+  };
+}
+
 export function createEducationalFieldGroup() {
   const id = uniqid();
   return {
@@ -16,6 +60,20 @@ export function createEducationalFieldGroup() {
         fieldId: uniqid(),
         name: "degreeName-" + id,
         label: "Degree Name",
+        value: "",
+        type: "text",
+      },
+      ["startDateField-" + id]: {
+        fieldId: uniqid(),
+        name: "startDate-" + id,
+        label: "Start Date",
+        value: "",
+        type: "text",
+      },
+      ["endDateField-" + id]: {
+        fieldId: uniqid(),
+        name: "endDate-" + id,
+        label: "End Date",
         value: "",
         type: "text",
       },
@@ -54,30 +112,40 @@ export function createPersonalDetailsFieldGroup() {
 }
 
 export function getSectionsAndFields() {
-  const educationFieldGroup1 = createEducationalFieldGroup(1);
-  const personalDetailsFieldGroup1 = createPersonalDetailsFieldGroup(1);
+  const educationFieldGroup = createEducationalFieldGroup();
+  const personalDetailsFieldGroup = createPersonalDetailsFieldGroup();
+  const experienceFieldGroup = createExperienceFieldGroup();
   return {
     personalDetailsSection: {
       sectionId: uniqid(),
       sectionName: "Personal Details",
-      fieldGroups: [personalDetailsFieldGroup1.fieldGroupName],
+      fieldGroups: [personalDetailsFieldGroup.fieldGroupName],
     },
     educationalSection: {
       sectionId: uniqid(),
       sectionName: "Educational",
-      fieldGroups: [educationFieldGroup1.fieldGroupName],
+      fieldGroups: [educationFieldGroup.fieldGroupName],
+    },
+    experienceSection: {
+      sectionId: uniqid(),
+      sectionName: "Work Experience",
+      fieldGroups: [experienceFieldGroup.fieldGroupName],
     },
     fieldGroups: {
-      [personalDetailsFieldGroup1.fieldGroupName]: [
-        ...Object.keys(personalDetailsFieldGroup1.fields),
+      [personalDetailsFieldGroup.fieldGroupName]: [
+        ...Object.keys(personalDetailsFieldGroup.fields),
       ],
-      [educationFieldGroup1.fieldGroupName]: [
-        ...Object.keys(educationFieldGroup1.fields),
+      [educationFieldGroup.fieldGroupName]: [
+        ...Object.keys(educationFieldGroup.fields),
+      ],
+      [experienceFieldGroup.fieldGroupName]: [
+        ...Object.keys(experienceFieldGroup.fields),
       ],
     },
     fields: {
-      ...personalDetailsFieldGroup1.fields,
-      ...educationFieldGroup1.fields,
+      ...personalDetailsFieldGroup.fields,
+      ...educationFieldGroup.fields,
+      ...experienceFieldGroup.fields,
     },
   };
 }
