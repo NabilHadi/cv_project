@@ -9,17 +9,18 @@ class FormFieldset extends Component {
   }
 
   onFieldChange(fieldId, newValue) {
-    this.props.onFieldChange(this.props.section.sectionId, fieldId, newValue);
+    this.props.onFieldChange(fieldId, newValue);
   }
 
   render() {
     return (
       <fieldset>
         <legend>{this.props.section.sectionName}</legend>
-        {this.props.section.fieldNames.map((fieldNamesGroup, index) => {
+        {this.props.section.fieldGroups.map((fieldGroupName, index) => {
+          const fieldNames = this.props.getFieldGroup(fieldGroupName);
           return (
             <p key={index}>
-              {fieldNamesGroup.map((fieldName) => {
+              {fieldNames.map((fieldName) => {
                 const field = this.props.getField(fieldName);
                 if (!field) return null;
 
