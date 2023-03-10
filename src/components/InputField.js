@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Component } from "react";
 
 class InputField extends Component {
@@ -32,5 +33,20 @@ class InputField extends Component {
     );
   }
 }
+
+InputField.defaultProps = {
+  type: "text",
+  placeholder: "",
+  name: "",
+};
+
+InputField.propTypes = {
+  fieldId: PropTypes.string,
+  initialValue: PropTypes.string,
+  type: PropTypes.string,
+  placeholder: PropTypes.string,
+  name: PropTypes.string,
+  onFieldChange: PropTypes.func,
+};
 
 export default InputField;

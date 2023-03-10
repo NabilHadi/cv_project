@@ -51,8 +51,6 @@ class App extends Component {
       ...getSectionsAndFields(),
     };
 
-    console.log(this.state);
-
     this.changeField = this.changeField.bind(this);
     this.getFieldByName = this.getFieldByName.bind(this);
     this.getFieldGroup = this.getFieldGroup.bind(this);
@@ -162,13 +160,7 @@ class App extends Component {
         </button>
         <br />
         <br />
-        {Object.values(this.state.fields).map((field) => {
-          return (
-            <div key={field.fieldId}>
-              {field.label}: {field.value}
-            </div>
-          );
-        })}
+        <section className="cv__view"></section>
       </div>
     );
   }
