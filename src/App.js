@@ -1,4 +1,5 @@
 import { Component } from "react";
+import Button from "./components/Button";
 import FormFieldset from "./components/FormFieldset";
 import {
   getSectionsAndFields,
@@ -154,10 +155,18 @@ class App extends Component {
             onFieldChange={this.changeField}
           />
         </form>
-        <button onClick={this.addNewEducationFieldGroup}>add education</button>
-        <button onClick={this.addNewExperienceFieldGroup}>
-          add experience
-        </button>
+        <Button
+          textContent="Add education"
+          eventListeners={{
+            onClick: this.addNewEducationFieldGroup,
+          }}
+        />
+        <Button
+          textContent="Add experience"
+          eventListeners={{
+            onClick: this.addNewExperienceFieldGroup,
+          }}
+        />
         <br />
         <br />
         <section className="cv__view"></section>
