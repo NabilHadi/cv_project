@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Component } from "react";
 import InputField from "./InputField";
 
@@ -13,15 +14,16 @@ class FormFieldset extends Component {
   }
 
   render() {
+    const { sectionName, fieldGroups, getFieldByName, getFields } = this.props;
     return (
       <fieldset>
-        <legend>{this.props.section.sectionName}</legend>
-        {this.props.section.fieldGroups.map((fieldGroupName, index) => {
-          const fieldNames = this.props.getFieldGroup(fieldGroupName);
+        <legend>{sectionName}</legend>
+        {fieldGroups.map((fieldGroupName, index) => {
+          const fieldNames = getFields(fieldGroupName);
           return (
             <p key={index}>
               {fieldNames.map((fieldName) => {
-                const field = this.props.getField(fieldName);
+                const field = getFieldByName(fieldName);
                 if (!field) return null;
 
                 return (
@@ -43,5 +45,18 @@ class FormFieldset extends Component {
     );
   }
 }
+
+FormFieldset.defaultProps = {
+  sectionName: "",
+  fieldGroups: [],
+};
+
+FormFieldset.propTypes = {
+  sectionName: PropTypes.string,
+  fieldGroups: PropTypes.array,
+  getFieldByName: PropTypes.func.isRequired,
+  getFields: PropTypes.func.isRequired,
+  onFieldChange: PropTypes.func.isRequired,
+};
 
 export default FormFieldset;

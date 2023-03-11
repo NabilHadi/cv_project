@@ -115,22 +115,29 @@ export function getSectionsAndFields() {
   const educationFieldGroup = createEducationalFieldGroup();
   const personalDetailsFieldGroup = createPersonalDetailsFieldGroup();
   const experienceFieldGroup = createExperienceFieldGroup();
+
+  const personalDetailsSectionId = uniqid();
+  const educationSectionId = uniqid();
+  const experienceSectionId = uniqid();
+
   return {
-    personalDetailsSection: {
-      sectionId: uniqid(),
-      sectionName: "Personal Details",
-      fieldGroups: [personalDetailsFieldGroup.fieldGroupName],
-    },
-    educationalSection: {
-      sectionId: uniqid(),
-      sectionName: "Educational",
-      fieldGroups: [educationFieldGroup.fieldGroupName],
-    },
-    experienceSection: {
-      sectionId: uniqid(),
-      sectionName: "Work Experience",
-      fieldGroups: [experienceFieldGroup.fieldGroupName],
-    },
+    sections: [
+      {
+        sectionId: personalDetailsSectionId,
+        sectionName: "Personal Details",
+        fieldGroups: [personalDetailsFieldGroup.fieldGroupName],
+      },
+      {
+        sectionId: educationSectionId,
+        sectionName: "Educational",
+        fieldGroups: [educationFieldGroup.fieldGroupName],
+      },
+      {
+        sectionId: experienceSectionId,
+        sectionName: "Work Experience",
+        fieldGroups: [experienceFieldGroup.fieldGroupName],
+      },
+    ],
     fieldGroups: {
       [personalDetailsFieldGroup.fieldGroupName]: [
         ...Object.keys(personalDetailsFieldGroup.fields),
@@ -146,6 +153,11 @@ export function getSectionsAndFields() {
       ...personalDetailsFieldGroup.fields,
       ...educationFieldGroup.fields,
       ...experienceFieldGroup.fields,
+    },
+    ids: {
+      personalDetailsSectionId,
+      educationSectionId,
+      experienceSectionId,
     },
   };
 }
