@@ -107,6 +107,14 @@ export function createPersonalDetailsFieldGroup() {
         value: "",
         type: "text",
       },
+      ["about-" + id]: {
+        fieldId: uniqid(),
+        name: "about-" + id,
+        label: "About",
+        value: "",
+        type: "text",
+        isGrow: true,
+      },
     },
   };
 }

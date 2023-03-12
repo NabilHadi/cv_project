@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
+import Button from "./Button";
 import FormFieldset from "./FormFieldset";
 
 export class Form extends Component {
@@ -10,9 +11,12 @@ export class Form extends Component {
       getFields,
       getSectionFieldGroups,
       onFieldChange,
+      addNewEducationFieldGroup,
+      addNewExperienceFieldGroup,
+      ids,
     } = this.props;
     return (
-      <form>
+      <form className="cv__form">
         {sections.map((section) => {
           return (
             <FormFieldset
@@ -22,7 +26,30 @@ export class Form extends Component {
               getFieldByName={getFieldByName}
               getFields={getFields}
               onFieldChange={onFieldChange}
-            />
+            >
+              {section.sectionId === ids.educationSectionId ? (
+                <Button
+                  textContent="Add Education"
+                  eventListeners={{
+                    onClick: addNewEducationFieldGroup,
+                  }}
+                  attributes={{
+                    type: "button",
+                  }}
+                />
+              ) : null}
+              {section.sectionId === ids.experienceSectionId ? (
+                <Button
+                  textContent="Add Experience"
+                  eventListeners={{
+                    onClick: addNewExperienceFieldGroup,
+                  }}
+                  attributes={{
+                    type: "button",
+                  }}
+                />
+              ) : null}
+            </FormFieldset>
           );
         })}
       </form>

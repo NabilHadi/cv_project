@@ -14,7 +14,8 @@ class FormFieldset extends Component {
   }
 
   render() {
-    const { sectionName, fieldGroups, getFieldByName, getFields } = this.props;
+    const { sectionName, fieldGroups, getFieldByName, getFields, children } =
+      this.props;
     return (
       <fieldset>
         <legend>{sectionName}</legend>
@@ -34,6 +35,7 @@ class FormFieldset extends Component {
                     type={field.type}
                     placeholder={field.label}
                     name={field.name}
+                    isGrow={field.isGrow}
                     onFieldChange={this.onFieldChange}
                   />
                 );
@@ -41,6 +43,7 @@ class FormFieldset extends Component {
             </p>
           );
         })}
+        {children}
       </fieldset>
     );
   }

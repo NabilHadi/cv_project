@@ -1,5 +1,5 @@
 import { Component } from "react";
-import Button from "./components/Button";
+import CV from "./components/CV";
 import Form from "./components/Form";
 import {
   getSectionsAndFields,
@@ -158,32 +158,69 @@ class App extends Component {
     });
   }
 
+  composePersonalDetailsSection() {
+    const section = this.state.sections.find(
+      (s) => s.sectionId === this.state.ids.personalDetailsSectionId
+    );
+    const fields = this.getFields(section.fieldGroups[0]).map((fieldName) => {
+      return this.getFieldByName(fieldName);
+    });
+    const nameField = fields.find((field) => field.name.startsWith("name"));
+    const emailField = fields.find((field) => field.name.startsWith("email"));
+    const phoneNumberField = fields.find((field) =>
+      field.name.startsWith("phoneNumber")
+    );
+    const aboutField = fields.find((field) => field.name.startsWith("about"));
+
+    return {
+      name: nameField,
+      email: emailField,
+      phoneNumber: phoneNumberField,
+      about: aboutField,
+    };
+  }
+
+  composeEducationalSection() {
+    const section = this.state.sections.find(
+      (s) => s.sectionId === this.state.ids.educationSectionId
+    );
+    if (!section) return;
+
+    return section.fieldGroups.map((fieldGroupName) => {
+      const fields = this.getFields(fieldGroupName).map((fieldName) => {
+        return this.getFieldByName(fieldName);
+      });
+      return {
+        fieldGroupName,
+        schoolName: fields.find((field) => field.name.startsWith("school")),
+        degreeName: fields.find((field) => field.name.startsWith("degree")),
+        startDate: fields.find((field) => field.name.startsWith("startDate")),
+        endDate: fields.find((field) => field.name.startsWith("endDate")),
+      };
+    });
+  }
+
   render() {
+    this.composePersonalDetailsSection();
     return (
-      <div className="App">
-        <Form
-          sections={this.state.sections}
-          getFieldByName={this.getFieldByName}
-          getFields={this.getFields}
-          onFieldChange={this.changeField}
-          getSectionFieldGroups={this.getSectionFieldGroups}
+      <main className="App">
+        <div>
+          <Form
+            sections={this.state.sections}
+            getFieldByName={this.getFieldByName}
+            getFields={this.getFields}
+            onFieldChange={this.changeField}
+            getSectionFieldGroups={this.getSectionFieldGroups}
+            addNewEducationFieldGroup={this.addNewEducationFieldGroup}
+            addNewExperienceFieldGroup={this.addNewExperienceFieldGroup}
+            ids={this.state.ids}
+          />
+        </div>
+        <CV
+          personalDetails={this.composePersonalDetailsSection()}
+          educational={this.composeEducationalSection()}
         />
-        <Button
-          textContent="Add education"
-          eventListeners={{
-            onClick: this.addNewEducationFieldGroup,
-          }}
-        />
-        <Button
-          textContent="Add experience"
-          eventListeners={{
-            onClick: this.addNewExperienceFieldGroup,
-          }}
-        />
-        <br />
-        <br />
-        <section className="cv__view"></section>
-      </div>
+      </main>
     );
   }
 }

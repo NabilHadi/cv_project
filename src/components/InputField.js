@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Component } from "react";
+import React, { Component } from "react";
 
 class InputField extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class InputField extends Component {
   }
 
   render() {
-    const { type, placeholder, name } = this.props;
+    const { type, placeholder, name, isGrow } = this.props;
     return (
       <input
         type={type}
