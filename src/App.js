@@ -1,226 +1,129 @@
-import { Component } from "react";
-import CV from "./components/CV";
+import React, { Component } from "react";
 import Form from "./components/Form";
-import {
-  getSectionsAndFields,
-  createEducationalFieldGroup,
-  createExperienceFieldGroup,
-} from "./utilities";
 
-/*
-App state: {
-  sections: [
-    {
-    sectionId: string,
-    sectionName: string,
-    fieldGroups: [
-      "fieldGroupName-1", "fieldGroupName-2"
-    ],
-    {
-    sectionId: string,
-    sectionName: string,
-    fieldGroups: [
-      "fieldGroupName-1", "fieldGroupName-2"
-    ],
-  }
-  ]
-  fieldGroups: {
-    "fieldGroupName-1": [
-      "fieldName-1", "fieldName-2"
-    ]
-    "fieldGroupName-2": [
-      "fieldName-3", "fieldName-4"
-    ]
-  }
-  fields: {
-    "fieldName-1": {
-      fieldId: string,
-      name: string,
-      label: string,
-      value: string,
-      type: string,
-    },
-    {
-    "fieldName-2": {
-      fieldId: string,
-      name: string,
-      label: string,
-      value: string,
-      type: string,
-    },
-  }
-}
-*/
-
-class App extends Component {
+export class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      ...getSectionsAndFields(),
+      personalDetailsFields: {
+        nameField: "John Doe",
+        emailField: "johndoe@gmail.com",
+        phoneNumberField: "+123 12345",
+        aboutField: "About me",
+      },
+      educationalFields: {
+        0: {
+          schoolNameField: "Famous school Name",
+          degreeNameField: "Master's",
+          eduStartDateField: "2012",
+          eduEndDateField: "2014",
+        },
+        1: {
+          schoolNameField: "Famous school Name",
+          degreeNameField: "Bachelor's",
+          eduStartDateField: "2008",
+          eduEndDateField: "2012",
+        },
+      },
+      experienceFields: {
+        0: {
+          companyNameField: "Google",
+          positionTitleField: "Software Engineer",
+          descriptionField: "Maintain google's search engine",
+          expStartDateField: "2015",
+          expEndDateField: "2017",
+        },
+        1: {
+          companyNameField: "Meta",
+          positionTitleField: "Senior Software Engineer",
+          descriptionField: "Develop VR applications",
+          expStartDateField: "2017",
+          expEndDateField: "present",
+        },
+      },
     };
 
-    this.changeField = this.changeField.bind(this);
-    this.getFieldByName = this.getFieldByName.bind(this);
-    this.getFields = this.getFields.bind(this);
-    this.getSectionFieldGroups = this.getSectionFieldGroups.bind(this);
-    this.addNewEducationFieldGroup = this.addNewEducationFieldGroup.bind(this);
-    this.addNewExperienceFieldGroup =
-      this.addNewExperienceFieldGroup.bind(this);
+    this.changePersonalDetails = this.changePersonalDetails.bind(this);
+    this.changeEducationalFields = this.changeEducationalFields.bind(this);
+    this.changeExperienceFields = this.changeExperienceFields.bind(this);
   }
 
-  changeField(fieldId, newValue) {
-    const enteries = Object.entries(this.state.fields);
-    const fieldEntry = enteries.find((entry) => {
-      return entry[1].fieldId === fieldId;
-    });
-    if (!fieldEntry) return;
+  changePersonalDetails(fieldName, newValue) {
+    if (!this.state.personalDetailsFields.hasOwnProperty(fieldName)) return;
 
     this.setState({
-      fields: {
-        ...this.state.fields,
-        [fieldEntry[0]]: {
-          ...this.state.fields[fieldEntry[0]],
-          value: newValue,
+      ...this.state,
+      personalDetailsFields: {
+        ...this.state.personalDetailsFields,
+        [fieldName]: newValue,
+      },
+    });
+  }
+
+  changeEducationalFields(id, fieldName, newValue) {
+    if (
+      !this.state.educationalFields.hasOwnProperty(id) ||
+      !this.state.educationalFields[id].hasOwnProperty(fieldName)
+    )
+      return;
+
+    this.setState({
+      ...this.state,
+      educationalFields: {
+        ...this.state.educationalFields,
+        [id]: {
+          ...this.state.educationalFields[id],
+          [fieldName]: newValue,
         },
       },
     });
   }
 
-  getFieldByName(fieldName) {
-    return this.state.fields[fieldName];
-  }
+  changeExperienceFields(id, fieldName, newValue) {
+    if (
+      !this.state.experienceFields.hasOwnProperty(id) ||
+      !this.state.experienceFields[id].hasOwnProperty(fieldName)
+    )
+      return;
 
-  getFields(fieldGroupName) {
-    return this.state.fieldGroups[fieldGroupName];
-  }
-
-  getSectionFieldGroups(sectionId) {
-    const section = this.state.sections.find((s) => s.sectionId === sectionId);
-    if (!section) return;
-
-    return section.fieldGroups;
-  }
-
-  addNewEducationFieldGroup() {
-    const edcucationFieldGroup = createEducationalFieldGroup();
     this.setState({
-      sections: this.state.sections.map((sec) => {
-        if (sec.sectionId === this.state.ids.educationSectionId) {
-          return {
-            ...sec,
-            fieldGroups: [
-              ...sec.fieldGroups,
-              edcucationFieldGroup.fieldGroupName,
-            ],
-          };
-        }
-        return sec;
-      }),
-      fieldGroups: {
-        ...this.state.fieldGroups,
-        [edcucationFieldGroup.fieldGroupName]: [
-          ...Object.keys(edcucationFieldGroup.fields),
-        ],
+      ...this.state,
+      experienceFields: {
+        ...this.state.experienceFields,
+        [id]: {
+          ...this.state.experienceFields[id],
+          [fieldName]: newValue,
+        },
       },
-      fields: {
-        ...this.state.fields,
-        ...edcucationFieldGroup.fields,
-      },
-    });
-  }
-
-  addNewExperienceFieldGroup() {
-    const experienceFieldGroup = createExperienceFieldGroup();
-    this.setState({
-      sections: this.state.sections.map((sec) => {
-        if (sec.sectionId === this.state.ids.experienceSectionId) {
-          return {
-            ...sec,
-            fieldGroups: [
-              ...sec.fieldGroups,
-              experienceFieldGroup.fieldGroupName,
-            ],
-          };
-        }
-        return sec;
-      }),
-      fieldGroups: {
-        ...this.state.fieldGroups,
-        [experienceFieldGroup.fieldGroupName]: [
-          ...Object.keys(experienceFieldGroup.fields),
-        ],
-      },
-      fields: {
-        ...this.state.fields,
-        ...experienceFieldGroup.fields,
-      },
-    });
-  }
-
-  composePersonalDetailsSection() {
-    const section = this.state.sections.find(
-      (s) => s.sectionId === this.state.ids.personalDetailsSectionId
-    );
-    const fields = this.getFields(section.fieldGroups[0]).map((fieldName) => {
-      return this.getFieldByName(fieldName);
-    });
-    const nameField = fields.find((field) => field.name.startsWith("name"));
-    const emailField = fields.find((field) => field.name.startsWith("email"));
-    const phoneNumberField = fields.find((field) =>
-      field.name.startsWith("phoneNumber")
-    );
-    const aboutField = fields.find((field) => field.name.startsWith("about"));
-
-    return {
-      name: nameField,
-      email: emailField,
-      phoneNumber: phoneNumberField,
-      about: aboutField,
-    };
-  }
-
-  composeEducationalSection() {
-    const section = this.state.sections.find(
-      (s) => s.sectionId === this.state.ids.educationSectionId
-    );
-    if (!section) return;
-
-    return section.fieldGroups.map((fieldGroupName) => {
-      const fields = this.getFields(fieldGroupName).map((fieldName) => {
-        return this.getFieldByName(fieldName);
-      });
-      return {
-        fieldGroupName,
-        schoolName: fields.find((field) => field.name.startsWith("school")),
-        degreeName: fields.find((field) => field.name.startsWith("degree")),
-        startDate: fields.find((field) => field.name.startsWith("startDate")),
-        endDate: fields.find((field) => field.name.startsWith("endDate")),
-      };
     });
   }
 
   render() {
-    this.composePersonalDetailsSection();
     return (
-      <main className="App">
-        <div>
-          <Form
-            sections={this.state.sections}
-            getFieldByName={this.getFieldByName}
-            getFields={this.getFields}
-            onFieldChange={this.changeField}
-            getSectionFieldGroups={this.getSectionFieldGroups}
-            addNewEducationFieldGroup={this.addNewEducationFieldGroup}
-            addNewExperienceFieldGroup={this.addNewExperienceFieldGroup}
-            ids={this.state.ids}
-          />
-        </div>
-        <CV
-          personalDetails={this.composePersonalDetailsSection()}
-          educational={this.composeEducationalSection()}
+      <div>
+        <Form
+          personalDetailsFields={this.state.personalDetailsFields}
+          changePersonalDetails={this.changePersonalDetails}
+          educationalFields={this.state.educationalFields}
+          changeEducationalFields={this.changeEducationalFields}
+          experienceFields={this.state.experienceFields}
+          changeExperienceFields={this.changeExperienceFields}
         />
-      </main>
+
+        <div>
+          <h2>Personal Details</h2>
+          <ul>
+            {Object.entries(this.state.personalDetailsFields).map(
+              ([fieldName, fieldValue]) => (
+                <li key={fieldName}>
+                  <strong>{fieldName}:</strong> {fieldValue}
+                </li>
+              )
+            )}
+          </ul>
+        </div>
+      </div>
     );
   }
 }
