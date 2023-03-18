@@ -1,0 +1,44 @@
+<svg id="visual" viewBox="0 0 794 1123" width="794" height="1123" xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+  <rect x="0" y="0" width="794" height="1123" fill="#FFFFFF"></rect>
+  <defs>
+    <linearGradient id="grad1_0" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="30%" stop-color="#f0f0f0" stop-opacity="1"></stop>
+      <stop offset="70%" stop-color="#f0f0f0" stop-opacity="1"></stop>
+    </linearGradient>
+  </defs>
+  <defs>
+    <linearGradient id="grad1_1" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="30%" stop-color="#f0f0f0" stop-opacity="1"></stop>
+      <stop offset="70%" stop-color="#ffffff" stop-opacity="1"></stop>
+    </linearGradient>
+  </defs>
+  <defs>
+    <linearGradient id="grad2_0" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="30%" stop-color="#f0f0f0" stop-opacity="1"></stop>
+      <stop offset="70%" stop-color="#f0f0f0" stop-opacity="1"></stop>
+    </linearGradient>
+  </defs>
+  <defs>
+    <linearGradient id="grad2_1" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="30%" stop-color="#ffffff" stop-opacity="1"></stop>
+      <stop offset="70%" stop-color="#f0f0f0" stop-opacity="1"></stop>
+    </linearGradient>
+  </defs>
+  <g transform="translate(794, 1123)">
+    <path
+      d="M-550.1 0C-542.5 -107.9 -534.8 -215.8 -476.4 -275.1C-418 -334.4 -308.9 -345 -221 -382.8C-133.1 -420.5 -66.6 -485.3 0 -550.1L0 0Z"
+      fill="#f7f7f7"></path>
+    <path
+      d="M-275.1 0C-271.2 -53.9 -267.4 -107.9 -238.2 -137.5C-209 -167.2 -154.4 -172.5 -110.5 -191.4C-66.6 -210.3 -33.3 -242.7 0 -275.1L0 0Z"
+      fill="#f0f0f0"></path>
+  </g>
+  <g transform="translate(0, 0)">
+    <path
+      d="M550.1 0C548.1 117.6 546 235.2 476.4 275.1C406.8 315 269.7 277.1 179 310C88.3 342.9 44.2 446.5 0 550.1L0 0Z"
+      fill="#f7f7f7"></path>
+    <path
+      d="M275.1 0C274 58.8 273 117.6 238.2 137.5C203.4 157.5 134.8 138.6 89.5 155C44.2 171.5 22.1 223.3 0 275.1L0 0Z"
+      fill="#f0f0f0"></path>
+  </g>
+</svg>

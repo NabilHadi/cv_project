@@ -122,8 +122,13 @@ export class Form extends Component {
   }
 
   render() {
-    const { nameField, emailField, phoneNumberField, aboutField } =
-      this.props.personalDetailsFields;
+    const {
+      nameField,
+      currentJobField,
+      emailField,
+      phoneNumberField,
+      aboutField,
+    } = this.props.personalDetailsFields;
 
     return (
       <form>
@@ -135,6 +140,14 @@ export class Form extends Component {
             type="text"
             inputName="name-input"
             value={nameField}
+            onInputChange={this.props.changePersonalDetails}
+          />
+          <FormField
+            id="currentJobField"
+            label="Current Job: "
+            type="text"
+            inputName="currentJob-input"
+            value={currentJobField}
             onInputChange={this.props.changePersonalDetails}
           />
           <FormField

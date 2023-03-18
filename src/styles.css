@@ -1,0 +1,126 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: rgb(234, 247, 247);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding: 1rem;
+  color: #4e4e4e;
+}
+
+.dot {
+  position: relative;
+}
+
+.dot::before {
+  content: "";
+  position: absolute;
+  height: 0.35cm;
+  width: 0.35cm;
+  border-radius: 50%;
+  background-color: #3d3d3d;
+}
+
+h3 {
+  color: #010101;
+  text-transform: uppercase;
+  margin-bottom: 0.3cm;
+  font-weight: 800;
+}
+
+h3.dot::before {
+  left: -0.5cm;
+  top: 0.15cm;
+}
+
+p i {
+  margin-right: 0.2cm;
+}
+
+.cv__view {
+  display: flex;
+  width: 21cm;
+  height: 29.7cm;
+  background-image: url("./blob-scene-haikei.svg");
+}
+
+.cv__view__left-column {
+  flex: 1;
+  height: 100%;
+  padding: 1rem;
+  padding-bottom: 0;
+  border-right: 2px solid #4e4e4e;
+  display: flex;
+  flex-direction: column;
+}
+
+.cv__view__personal__txt_container {
+  margin-left: 0.5cm;
+  padding-left: 0.3cm;
+  padding-right: 0.3cm;
+  border-left: 2px #4e4e4e solid;
+  flex: 1;
+}
+
+.cv__view__personal__txt_container::before {
+  left: -0.2cm;
+}
+
+/* 1cm == 37.795px */
+
+.cv__view__personal__img {
+  width: 100%;
+  max-width: 5.5cm;
+  border: 0.13cm solid #3d3d3d;
+  padding: 0.1cm;
+  border-radius: 50%;
+  margin-top: 2.169cm;
+}
+
+.cv__view__personal__img__container {
+  text-align: center;
+}
+
+.cv__view__personal__img__container::before {
+  bottom: 1.1cm;
+  right: 1.15cm;
+}
+
+.cv__view__perosnal__name {
+  font-size: 1.3cm;
+  line-height: 0.9;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.cv__view__perosnal__current-job {
+  font-size: 0.5cm;
+  margin-top: 8px;
+  margin-bottom: 1cm;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.cv__view__personal__email,
+.cv__view__perosnal__phone-number {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  margin-bottom: 0.3cm;
+}
+
+.cv__view__right-column {
+  flex: 1.7;
+  height: 100%;
+  padding: 20px;
+  padding-left: 0.3cm;
+}
+
+.cv__view__right__about {
+  margin-top: 2.169cm;
+}

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import CV from "./components/CV";
 import Form from "./components/Form";
 
 export class App extends Component {
@@ -9,8 +10,10 @@ export class App extends Component {
       personalDetailsFields: {
         nameField: "John Doe",
         emailField: "johndoe@gmail.com",
+        currentJobField: "Senior Software Engineer",
         phoneNumberField: "+123 12345",
-        aboutField: "About me",
+        aboutField:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis soluta obcaecati sint officiis fuga quia sapiente rerum eius enim? Veniam.",
       },
       educationalFields: {
         0: {
@@ -111,18 +114,11 @@ export class App extends Component {
           changeExperienceFields={this.changeExperienceFields}
         />
 
-        <div>
-          <h2>Personal Details</h2>
-          <ul>
-            {Object.entries(this.state.personalDetailsFields).map(
-              ([fieldName, fieldValue]) => (
-                <li key={fieldName}>
-                  <strong>{fieldName}:</strong> {fieldValue}
-                </li>
-              )
-            )}
-          </ul>
-        </div>
+        <CV
+          personalDetailsFields={this.state.personalDetailsFields}
+          educationalFields={this.state.educationalFields}
+          experienceFields={this.state.experienceFields}
+        />
       </div>
     );
   }
