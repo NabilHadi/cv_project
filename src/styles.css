@@ -11,7 +11,8 @@ body {
   color: #4e4e4e;
 }
 
-.dot {
+.dot,
+.sm-dot {
   position: relative;
 }
 
@@ -24,6 +25,23 @@ body {
   background-color: #3d3d3d;
 }
 
+.sm-dot::before {
+  content: "";
+  position: absolute;
+  height: 0.2cm;
+  width: 0.2cm;
+  border-radius: 50%;
+  background-color: #3d3d3d;
+}
+
+ul {
+  list-style: none;
+}
+
+ul li {
+  margin-top: 1rem;
+}
+
 h3 {
   color: #010101;
   text-transform: uppercase;
@@ -34,6 +52,11 @@ h3 {
 h3.dot::before {
   left: -0.5cm;
   top: 0.15cm;
+}
+
+h4.sm-dot::before {
+  left: -0.4cm;
+  top: 0.25cm;
 }
 
 p i {
@@ -82,6 +105,7 @@ p i {
 }
 
 .cv__view {
+  flex-shrink: 0;
   display: flex;
   width: 21cm;
   height: 29.7cm;
@@ -163,7 +187,11 @@ p i {
   padding-left: 0.3cm;
 }
 
-.cv__view__right__about {
+.cv__view__right-column > div {
+  margin-top: 1cm;
+}
+
+div.cv__view__right__about {
   margin-top: 2.169cm;
 }
 
