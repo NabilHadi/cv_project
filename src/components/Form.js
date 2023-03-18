@@ -23,7 +23,7 @@ export class Form extends Component {
     };
 
     return (
-      <div key={id}>
+      <div key={id} className="FieldGroup">
         <h3>Education {Number(id) + 1}</h3>
         <FormField
           id={id + "schoolNameField"}
@@ -75,7 +75,7 @@ export class Form extends Component {
     };
 
     return (
-      <div key={id}>
+      <div key={id} className="FieldGroup">
         <h3>Experience {Number(id) + 1}</h3>
         <FormField
           id={id + "companyNameField"}
@@ -131,7 +131,7 @@ export class Form extends Component {
     } = this.props.personalDetailsFields;
 
     return (
-      <form>
+      <form className="cv__form">
         <fieldset>
           <legend>Personal Details</legend>
           <FormField

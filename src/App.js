@@ -104,7 +104,7 @@ export class App extends Component {
 
   render() {
     return (
-      <div>
+      <>
         <Form
           personalDetailsFields={this.state.personalDetailsFields}
           changePersonalDetails={this.changePersonalDetails}
@@ -119,7 +119,7 @@ export class App extends Component {
           educationalFields={this.state.educationalFields}
           experienceFields={this.state.experienceFields}
         />
-      </div>
+      </>
     );
   }
 }

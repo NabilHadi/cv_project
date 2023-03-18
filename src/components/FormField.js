@@ -13,7 +13,7 @@ export class FormField extends Component {
   render() {
     const { id, label, type, inputName, value } = this.props;
     return (
-      <div>
+      <div className="FormField">
         <label htmlFor={id}>{label}</label>
         {type === "textarea" ? (
           <textarea

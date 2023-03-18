@@ -5,7 +5,7 @@
 }
 
 body {
-  background-color: rgb(234, 247, 247);
+  background-color: rgb(46, 88, 88);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   padding: 1rem;
   color: #4e4e4e;
@@ -38,6 +38,47 @@ h3.dot::before {
 
 p i {
   margin-right: 0.2cm;
+}
+
+#root {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.cv__form {
+  background-color: #f7f7f7;
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.cv__form h3 {
+  text-align: center;
+}
+
+.cv__form .FormField {
+  display: flex;
+  flex-direction: column;
+  padding: 0.3rem;
+}
+
+.cv__form .FormField input {
+  padding: 0.2rem;
+}
+
+.cv__form legend {
+  font-weight: bold;
+}
+
+.cv__form .FieldGroup {
+  padding: 0.5rem 0;
+}
+
+.cv__form .FieldGroup:not(:first-of-type) {
+  border-top: 1px solid #010101;
 }
 
 .cv__view {
@@ -95,6 +136,7 @@ p i {
   text-transform: uppercase;
   font-weight: bold;
   margin-top: 20px;
+  word-break: keep-all;
 }
 
 .cv__view__perosnal__current-job {
@@ -134,7 +176,12 @@ p i {
   body {
     padding: 0;
   }
-  form {
+
+  #root {
+    display: block;
+  }
+
+  :not(html, body, #root, .cv__view, .cv__view *) {
     display: none;
   }
 }
