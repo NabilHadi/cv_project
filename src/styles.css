@@ -124,3 +124,17 @@ p i {
 .cv__view__right__about {
   margin-top: 2.169cm;
 }
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+  body {
+    padding: 0;
+  }
+  form {
+    display: none;
+  }
+}
