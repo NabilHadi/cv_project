@@ -4,11 +4,25 @@
   margin: 0;
 }
 
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+}
+
+:root {
+  --primary-color: hsl(229, 70%, 10%);
+  --scondary-color: hsl(229, 60%, 50%);
+  --neutral-color: hsl(229, 50%, 98%);
+}
+
 body {
-  background-color: rgb(46, 88, 88);
+  background-color: var(--neutral-color);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   padding: 1rem;
-  color: #4e4e4e;
+  color: var(--primary-color);
 }
 
 .dot,
@@ -22,7 +36,7 @@ body {
   height: 0.35cm;
   width: 0.35cm;
   border-radius: 50%;
-  background-color: #3d3d3d;
+  background-color: var(--scondary-color);
 }
 
 .sm-dot::before {
@@ -31,7 +45,7 @@ body {
   height: 0.2cm;
   width: 0.2cm;
   border-radius: 50%;
-  background-color: #3d3d3d;
+  background-color: var(--scondary-color);
 }
 
 ul {
@@ -43,7 +57,7 @@ ul li {
 }
 
 h3 {
-  color: #010101;
+  color: var(--primary-color);
   text-transform: uppercase;
   margin-bottom: 0.3cm;
   font-weight: 800;
@@ -71,7 +85,6 @@ p i {
 }
 
 .cv__form {
-  background-color: #f7f7f7;
   padding: 1rem;
   display: flex;
   flex-wrap: wrap;
@@ -82,26 +95,41 @@ p i {
   text-align: center;
 }
 
+.cv__form fieldset {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+}
+
+.cv__form .FieldGroup {
+  flex: 1;
+}
+
 .cv__form .FormField {
   display: flex;
   flex-direction: column;
   padding: 0.3rem;
 }
 
-.cv__form .FormField input {
-  padding: 0.2rem;
+.cv__form .FormField textarea {
+  height: max(120px, 10vh);
+}
+
+.cv__form .FormField :is(input, textarea) {
+  padding: 0.3rem;
+  font-size: 1rem;
+  border: 2px solid var(--primary-color);
+  border-radius: 5px;
+}
+
+.cv__form .FormField :is(input, textarea):focus {
+  border-color: var(--scondary-color);
+  outline: 2px solid var(--scondary-color);
 }
 
 .cv__form legend {
   font-weight: bold;
-}
-
-.cv__form .FieldGroup {
-  padding: 0.5rem 0;
-}
-
-.cv__form .FieldGroup:not(:first-of-type) {
-  border-top: 1px solid #010101;
+  color: var(--scondary-color);
 }
 
 .cv__view {
@@ -110,6 +138,7 @@ p i {
   width: 21cm;
   height: 29.7cm;
   background-image: url("./blob-scene-haikei.svg");
+  border: 1px solid var(--primary-color-light);
 }
 
 .cv__view__left-column {
@@ -117,7 +146,7 @@ p i {
   height: 100%;
   padding: 1rem;
   padding-bottom: 0;
-  border-right: 2px solid #4e4e4e;
+  border-right: 2px solid var(--primary-color);
   display: flex;
   flex-direction: column;
 }
@@ -126,7 +155,7 @@ p i {
   margin-left: 0.5cm;
   padding-left: 0.3cm;
   padding-right: 0.3cm;
-  border-left: 2px #4e4e4e solid;
+  border-left: 2px var(--primary-color) solid;
   flex: 1;
 }
 
@@ -139,7 +168,7 @@ p i {
 .cv__view__personal__img {
   width: 100%;
   max-width: 5.5cm;
-  border: 0.13cm solid #3d3d3d;
+  border: 0.13cm solid var(--primary-color);
   padding: 0.1cm;
   border-radius: 50%;
   margin-top: 2.169cm;
