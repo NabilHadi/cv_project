@@ -9,10 +9,10 @@ export class Form extends Component {
     this.composeExperienceFields = this.composeExperienceFields.bind(this);
   }
 
-  composeEducationFields(id) {
-    if (!this.props.educationalFields[id]) return null;
+  composeEducationFields(fields, index) {
+    if (!fields) return;
 
-    const fields = this.props.educationalFields[id];
+    const { id } = fields;
 
     const onInputChange = (fieldName = "", newValue) => {
       this.props.changeEducationalFields(
@@ -24,7 +24,7 @@ export class Form extends Component {
 
     return (
       <div key={id} className="FieldGroup">
-        <h3>Education {Number(id) + 1}</h3>
+        <h3>Education {index + 1}</h3>
         <FormField
           id={id + "schoolNameField"}
           label={"School Name: "}
@@ -61,10 +61,10 @@ export class Form extends Component {
     );
   }
 
-  composeExperienceFields(id) {
-    if (!this.props.experienceFields[id]) return null;
+  composeExperienceFields(fields, index) {
+    if (!fields) return;
 
-    const fields = this.props.experienceFields[id];
+    const { id } = fields;
 
     const onInputChange = (fieldName = "", newValue) => {
       this.props.changeExperienceFields(
@@ -76,7 +76,7 @@ export class Form extends Component {
 
     return (
       <div key={id} className="FieldGroup">
-        <h3>Experience {Number(id) + 1}</h3>
+        <h3>Experience {index + 1}</h3>
         <FormField
           id={id + "companyNameField"}
           label={"Company Name: "}
@@ -178,16 +178,12 @@ export class Form extends Component {
 
         <fieldset>
           <legend>Educational Details</legend>
-          {Object.keys(this.props.educationalFields).map(
-            this.composeEducationFields
-          )}
+          {this.props.educationalFields.map(this.composeEducationFields)}
         </fieldset>
 
         <fieldset>
           <legend>Experience Details</legend>
-          {Object.keys(this.props.experienceFields).map(
-            this.composeExperienceFields
-          )}
+          {this.props.experienceFields.map(this.composeExperienceFields)}
         </fieldset>
       </form>
     );

@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import CV from "./components/CV";
 import Form from "./components/Form";
+import { findObjectInArrayWith } from "./utils";
 
 export class App extends Component {
   constructor(props) {
     super(props);
+
+    this.counter = 0;
 
     this.state = {
       personalDetailsFields: {
@@ -15,41 +18,91 @@ export class App extends Component {
         aboutField:
           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis soluta obcaecati sint officiis fuga quia sapiente rerum eius enim? Veniam.",
       },
-      educationalFields: {
-        0: {
-          schoolNameField: "Famous school Name",
-          degreeNameField: "Master's",
-          eduStartDateField: "2012",
-          eduEndDateField: "2014",
-        },
-        1: {
-          schoolNameField: "Famous school Name",
-          degreeNameField: "Bachelor's",
-          eduStartDateField: "2008",
-          eduEndDateField: "2012",
-        },
-      },
-      experienceFields: {
-        0: {
-          companyNameField: "Google",
-          positionTitleField: "Software Engineer",
-          descriptionField: "Maintain google's search engine",
-          expStartDateField: "2015",
-          expEndDateField: "2017",
-        },
-        1: {
-          companyNameField: "Meta",
-          positionTitleField: "Senior Software Engineer",
-          descriptionField: "Develop VR applications",
-          expStartDateField: "2017",
-          expEndDateField: "present",
-        },
-      },
+      educationalFields: [
+        this.createEducationalFields({
+          schoolName: "Famous school Name",
+          degreeName: "Master's",
+          startDate: "2012",
+          endDate: "2014",
+        }),
+        this.createEducationalFields({
+          schoolName: "Famous school Name",
+          degreeName: "Bachelor's",
+          startDate: "2008",
+          endDate: "2012",
+        }),
+      ],
+      experienceFields: [
+        this.createExperienceFields({
+          companyName: "Google",
+          positionTitle: "Software Engineer",
+          description: "Maintain google's search engine",
+          startDate: "2015",
+          endDate: "2017",
+        }),
+        this.createExperienceFields({
+          companyName: "Meta",
+          positionTitle: "Senior Software Engineer",
+          description: "Develop VR applications",
+          startDate: "2017",
+          endDate: "present",
+        }),
+      ],
     };
 
     this.changePersonalDetails = this.changePersonalDetails.bind(this);
     this.changeEducationalFields = this.changeEducationalFields.bind(this);
     this.changeExperienceFields = this.changeExperienceFields.bind(this);
+    this.createEducationalFields = this.createEducationalFields.bind(this);
+    this.createExperienceFields = this.createExperienceFields.bind(this);
+    this.addEducationalFields = this.addEducationalFields.bind(this);
+    this.addExperienceFields = this.addExperienceFields.bind(this);
+  }
+
+  addEducationalFields(fields) {
+    this.setState({
+      ...this.state,
+      educationalFields: [...this.state.educationalFields, fields],
+    });
+  }
+
+  addExperienceFields(fields) {
+    this.setState({
+      ...this.state,
+      experienceFields: [...this.state.experienceFields, fields],
+    });
+  }
+
+  createEducationalFields({
+    schoolName = "",
+    degreeName = "",
+    startDate = "",
+    endDate = "",
+  }) {
+    return {
+      id: this.counter++,
+      schoolNameField: schoolName,
+      degreeNameField: degreeName,
+      eduStartDateField: startDate,
+      eduEndDateField: endDate,
+    };
+  }
+
+  createExperienceFields({
+    companyName = "",
+    positionTitle = "",
+    description = "",
+    startDate = "",
+    endDate = "",
+  }) {
+    return {
+      id: this.counter++,
+      companyNameField: companyName,
+      positionTitleField: positionTitle,
+      descriptionField: description,
+      expStartDateField: startDate,
+      expEndDateField: endDate,
+    };
   }
 
   changePersonalDetails(fieldName, newValue) {
@@ -65,40 +118,36 @@ export class App extends Component {
   }
 
   changeEducationalFields(id, fieldName, newValue) {
-    if (
-      !this.state.educationalFields.hasOwnProperty(id) ||
-      !this.state.educationalFields[id].hasOwnProperty(fieldName)
-    )
-      return;
+    if (!findObjectInArrayWith(this.state.educationalFields, { id })) return;
 
     this.setState({
       ...this.state,
-      educationalFields: {
-        ...this.state.educationalFields,
-        [id]: {
-          ...this.state.educationalFields[id],
-          [fieldName]: newValue,
-        },
-      },
+      educationalFields: this.state.educationalFields.map((fields) => {
+        if (fields.id === id) {
+          return {
+            ...fields,
+            [fieldName]: newValue,
+          };
+        }
+        return fields;
+      }),
     });
   }
 
   changeExperienceFields(id, fieldName, newValue) {
-    if (
-      !this.state.experienceFields.hasOwnProperty(id) ||
-      !this.state.experienceFields[id].hasOwnProperty(fieldName)
-    )
-      return;
+    if (!findObjectInArrayWith(this.state.experienceFields, { id })) return;
 
     this.setState({
       ...this.state,
-      experienceFields: {
-        ...this.state.experienceFields,
-        [id]: {
-          ...this.state.experienceFields[id],
-          [fieldName]: newValue,
-        },
-      },
+      experienceFields: this.state.experienceFields.map((fields) => {
+        if (fields.id === id) {
+          return {
+            ...fields,
+            [fieldName]: newValue,
+          };
+        }
+        return fields;
+      }),
     });
   }
 

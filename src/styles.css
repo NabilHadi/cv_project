@@ -82,6 +82,7 @@ p i {
   gap: 1rem;
   justify-content: center;
   align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 .cv__form {

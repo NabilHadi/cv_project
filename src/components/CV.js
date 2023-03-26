@@ -42,16 +42,15 @@ export class CV extends Component {
           <div className="cv__view__education">
             <h3 className="dot">Education</h3>
             <ul className="cv__view__education__list">
-              {Object.keys(this.props.educationalFields).map((key) => {
-                const obj = this.props.educationalFields[key];
+              {this.props.educationalFields.map((fields) => {
                 return (
-                  <li key={key}>
-                    <h4 className="sm-dot">{obj.degreeNameField}</h4>
-                    <p>{obj.schoolNameField}</p>
+                  <li key={fields.id}>
+                    <h4 className="sm-dot">{fields.degreeNameField}</h4>
+                    <p>{fields.schoolNameField}</p>
                     <div>
-                      <span>{obj.eduStartDateField}</span>
+                      <span>{fields.eduStartDateField}</span>
                       {" - "}
-                      <span>{obj.eduEndDateField}</span>
+                      <span>{fields.eduEndDateField}</span>
                     </div>
                   </li>
                 );
@@ -62,17 +61,16 @@ export class CV extends Component {
           <div className="cv__view__experience">
             <h3 className="dot">Experience</h3>
             <ul className="cv__view__experience__list">
-              {Object.keys(this.props.experienceFields).map((key) => {
-                const obj = this.props.experienceFields[key];
+              {this.props.experienceFields.map((fields) => {
                 return (
-                  <li key={key}>
-                    <h4 className="sm-dot">{obj.positionTitleField}</h4>
-                    <h5>{obj.companyNameField}</h5>
-                    <p>{obj.descriptionField}</p>
+                  <li key={fields.id}>
+                    <h4 className="sm-dot">{fields.positionTitleField}</h4>
+                    <h5>{fields.companyNameField}</h5>
+                    <p>{fields.descriptionField}</p>
                     <div>
-                      <span>{obj.expStartDateField}</span>
+                      <span>{fields.expStartDateField}</span>
                       {" - "}
-                      <span>{obj.expEndDateField}</span>
+                      <span>{fields.expEndDateField}</span>
                     </div>
                   </li>
                 );
