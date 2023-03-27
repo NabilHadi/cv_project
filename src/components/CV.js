@@ -15,20 +15,20 @@ export class CV extends Component {
           </div>
           <div className="cv__view__personal__txt_container dot">
             <h2 className="cv__view__perosnal__name">
-              {this.props.personalDetailsFields.nameField}
+              {this.props.nameField.value}
             </h2>
             <p className="cv__view__perosnal__current-job">
-              {this.props.personalDetailsFields.currentJobField}
+              {this.props.currentJobField.value}
             </p>
             <div>
               <h3 className="dot">Contacts</h3>
               <p className="cv__view__personal__email">
                 <i className="fa-solid fa-envelope fa-lg"></i>
-                {this.props.personalDetailsFields.emailField}
+                {this.props.emailField.value}
               </p>
               <p className="cv__view__perosnal__phone-number">
                 <i className="fa-solid fa-phone fa-lg"></i>
-                {this.props.personalDetailsFields.phoneNumberField}
+                {this.props.phoneNumberField.value}
               </p>
             </div>
           </div>
@@ -36,13 +36,13 @@ export class CV extends Component {
         <section className="cv__view__right-column">
           <div className="cv__view__right__about">
             <h3 className="dot">About Me</h3>
-            <p>{this.props.personalDetailsFields.aboutField}</p>
+            <p>{this.props.aboutField.value}</p>
           </div>
 
           <div className="cv__view__education">
             <h3 className="dot">Education</h3>
             <ul className="cv__view__education__list">
-              {this.props.educationalFields.map((fields) => {
+              {this.props.educationalFields.map(({ id, fields }) => {
                 return (
                   <li key={fields.id}>
                     <h4 className="sm-dot">{fields.degreeNameField}</h4>
