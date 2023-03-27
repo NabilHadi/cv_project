@@ -9,8 +9,8 @@ export class CV extends Component {
           <div className="cv__view__personal__img__container dot">
             <img
               className="cv__view__personal__img"
-              src={personIconSrc}
-              alt=""
+              src={this.props.personalDetailsFields.imgSrc || personIconSrc}
+              alt="profile pic"
             />
           </div>
           <div className="cv__view__personal__txt_container dot">

@@ -20,39 +20,15 @@ export class App extends Component {
 
     this.counter = 0;
     this.state = {
-      personalDetailsFields: [
-        new Field({
-          id: "nameInput",
-          label: "Name: ",
-          type: "text",
-          value: "John Doe",
-        }),
-        new Field({
-          id: "currentJobInput",
-          label: "Current Job: ",
-          type: "text",
-          value: "Senior Software Engineer",
-        }),
-        new Field({
-          id: "emailInput",
-          label: "Email: ",
-          type: "email",
-          value: "johndoe@gmail.com",
-        }),
-        new Field({
-          id: "phoneNumberInput",
-          label: "Phone Number",
-          type: "text",
-          value: "+123 12345",
-        }),
-        new Field({
-          id: "about",
-          label: "About: ",
-          value:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis soluta obcaecati sint officiis fuga quia sapiente rerum eius enim? Veniam.",
-          isTextArea: true,
-        }),
-      ],
+      personalDetailsFields: {
+        imgSrc: "",
+        nameField: "John Doe",
+        emailField: "johndoe@gmail.com",
+        currentJobField: "Senior Software Engineer",
+        phoneNumberField: "+123 12345",
+        aboutField:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis soluta obcaecati sint officiis fuga quia sapiente rerum eius enim? Veniam.",
+      },
       educationalFields: [
         this.createEducationalFields(
           {
@@ -98,6 +74,13 @@ export class App extends Component {
     this.createExperienceFields = this.createExperienceFields.bind(this);
     this.addEducationalFields = this.addEducationalFields.bind(this);
     this.addExperienceFields = this.addExperienceFields.bind(this);
+    this.onImageChange = this.onImageChange.bind(this);
+  }
+
+  onImageChange(e) {
+    const imgSrc = URL.createObjectURL(e.target.files[0]);
+    console.log(imgSrc);
+    this.changePersonalDetails("imgSrc", imgSrc);
   }
 
   addEducationalFields(fields) {
@@ -245,6 +228,7 @@ export class App extends Component {
           addExperienceFields={() => {
             this.addExperienceFields(this.createExperienceFields());
           }}
+          onImageChange={this.onImageChange}
         />
 
         <CV

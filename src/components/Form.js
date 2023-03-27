@@ -99,19 +99,54 @@ export class Form extends Component {
       <form className="cv__form">
         <fieldset>
           <legend>Personal Details</legend>
-          {this.props.personalDetailsFields.map((field) => {
-            return (
-              <FormField
-                key={field.id}
-                id={field.id}
-                label={field.label}
-                type={field.type}
-                inputName={field.name}
-                value={field.value}
-                onInputChange={this.props.changePersonalDetails}
-              />
-            );
-          })}
+          <label htmlFor="avatar">Choose a profile picture:</label>
+          <input
+            type="file"
+            id="avatar"
+            name="avatar"
+            accept="image/png, image/jpeg"
+            onChange={this.props.onImageChange}
+          />
+          <FormField
+            id="nameField"
+            label="Name: "
+            type="text"
+            inputName="name-input"
+            value={nameField}
+            onInputChange={this.props.changePersonalDetails}
+          />
+          <FormField
+            id="currentJobField"
+            label="Current Job: "
+            type="text"
+            inputName="currentJob-input"
+            value={currentJobField}
+            onInputChange={this.props.changePersonalDetails}
+          />
+          <FormField
+            id="emailField"
+            label="Email: "
+            type="email"
+            inputName="email-input"
+            value={emailField}
+            onInputChange={this.props.changePersonalDetails}
+          />
+          <FormField
+            id="phoneNumberField"
+            label="Phone Number: "
+            type="text"
+            inputName="phoneNumber-input"
+            value={phoneNumberField}
+            onInputChange={this.props.changePersonalDetails}
+          />
+          <FormField
+            id="aboutField"
+            label="About: "
+            type="textarea"
+            inputName="about-input"
+            value={aboutField}
+            onInputChange={this.props.changePersonalDetails}
+          />
         </fieldset>
 
         <fieldset>
