@@ -3,34 +3,75 @@ import CV from "./components/CV";
 import Form from "./components/Form";
 import { findObjectInArrayWith } from "./utils";
 
+class Field {
+  constructor({ id, name, label, type, value, isTextArea }) {
+    this.id = id;
+    this.name = name ?? this.id;
+    this.label = label;
+    this.type = type;
+    this.value = value;
+    this.isTextArea = isTextArea ?? false;
+  }
+}
+
 export class App extends Component {
   constructor(props) {
     super(props);
 
     this.counter = 0;
-
     this.state = {
-      personalDetailsFields: {
-        nameField: "John Doe",
-        emailField: "johndoe@gmail.com",
-        currentJobField: "Senior Software Engineer",
-        phoneNumberField: "+123 12345",
-        aboutField:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis soluta obcaecati sint officiis fuga quia sapiente rerum eius enim? Veniam.",
-      },
+      personalDetailsFields: [
+        new Field({
+          id: "nameInput",
+          label: "Name: ",
+          type: "text",
+          value: "John Doe",
+        }),
+        new Field({
+          id: "currentJobInput",
+          label: "Current Job: ",
+          type: "text",
+          value: "Senior Software Engineer",
+        }),
+        new Field({
+          id: "emailInput",
+          label: "Email: ",
+          type: "email",
+          value: "johndoe@gmail.com",
+        }),
+        new Field({
+          id: "phoneNumberInput",
+          label: "Phone Number",
+          type: "text",
+          value: "+123 12345",
+        }),
+        new Field({
+          id: "about",
+          label: "About: ",
+          value:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis soluta obcaecati sint officiis fuga quia sapiente rerum eius enim? Veniam.",
+          isTextArea: true,
+        }),
+      ],
       educationalFields: [
-        this.createEducationalFields({
-          schoolName: "Famous school Name",
-          degreeName: "Master's",
-          startDate: "2012",
-          endDate: "2014",
-        }),
-        this.createEducationalFields({
-          schoolName: "Famous school Name",
-          degreeName: "Bachelor's",
-          startDate: "2008",
-          endDate: "2012",
-        }),
+        this.createEducationalFields(
+          {
+            schoolName: "Famous school Name",
+            degreeName: "Master's",
+            startDate: "2012",
+            endDate: "2014",
+          },
+          0
+        ),
+        this.createEducationalFields(
+          {
+            schoolName: "Famous school Name 2",
+            degreeName: "Bachelor's",
+            startDate: "2008",
+            endDate: "2012",
+          },
+          1
+        ),
       ],
       experienceFields: [
         this.createExperienceFields({
@@ -73,18 +114,38 @@ export class App extends Component {
     });
   }
 
-  createEducationalFields({
-    schoolName = "",
-    degreeName = "",
-    startDate = "",
-    endDate = "",
-  }) {
+  createEducationalFields(
+    { schoolName = "", degreeName = "", startDate = "", endDate = "" },
+    index
+  ) {
     return {
-      id: this.counter++,
-      schoolNameField: schoolName,
-      degreeNameField: degreeName,
-      eduStartDateField: startDate,
-      eduEndDateField: endDate,
+      id: index,
+      fields: [
+        new Field({
+          id: index + "schoolNameInput",
+          label: "School Name: ",
+          type: "text",
+          value: schoolName,
+        }),
+        new Field({
+          id: index + "degreeNameInput",
+          label: "Degree Name: ",
+          type: "text",
+          value: degreeName,
+        }),
+        new Field({
+          id: index + "eduStartDateInput",
+          label: "Start Date: ",
+          type: "text",
+          value: startDate,
+        }),
+        new Field({
+          id: index + "eduEndDateInput",
+          label: "End Date: ",
+          type: "text",
+          value: endDate,
+        }),
+      ],
     };
   }
 
@@ -105,31 +166,46 @@ export class App extends Component {
     };
   }
 
-  changePersonalDetails(fieldName, newValue) {
-    if (!this.state.personalDetailsFields.hasOwnProperty(fieldName)) return;
+  changePersonalDetails(fieldId, newValue) {
+    if (
+      !findObjectInArrayWith(this.state.personalDetailsFields, {
+        id: fieldId,
+      })
+    )
+      return;
 
     this.setState({
       ...this.state,
-      personalDetailsFields: {
-        ...this.state.personalDetailsFields,
-        [fieldName]: newValue,
-      },
+      personalDetailsFields: this.state.personalDetailsFields.map((field) => {
+        if (field.id === fieldId) {
+          return new Field({ ...field, value: newValue });
+        }
+        return field;
+      }),
     });
   }
 
-  changeEducationalFields(id, fieldName, newValue) {
-    if (!findObjectInArrayWith(this.state.educationalFields, { id })) return;
+  changeEducationalFields(fieldGroupId, fieldId, newValue) {
+    if (
+      !findObjectInArrayWith(this.state.educationalFields, { id: fieldGroupId })
+    )
+      return;
 
     this.setState({
       ...this.state,
-      educationalFields: this.state.educationalFields.map((fields) => {
-        if (fields.id === id) {
+      educationalFields: this.state.educationalFields.map((fieldGroup) => {
+        if (fieldGroup.id === fieldGroupId) {
           return {
-            ...fields,
-            [fieldName]: newValue,
+            ...fieldGroup,
+            fields: fieldGroup.fields.map((field) => {
+              if (field.id === fieldId) {
+                return new Field({ ...field, value: newValue });
+              }
+              return field;
+            }),
           };
         }
-        return fields;
+        return fieldGroup;
       }),
     });
   }
@@ -165,6 +241,11 @@ export class App extends Component {
 
         <CV
           personalDetailsFields={this.state.personalDetailsFields}
+          nameField={this.state.personalDetailsFields[0]}
+          currentJobField={this.state.personalDetailsFields[1]}
+          emailField={this.state.personalDetailsFields[2]}
+          phoneNumberField={this.state.personalDetailsFields[3]}
+          aboutField={this.state.personalDetailsFields[4]}
           educationalFields={this.state.educationalFields}
           experienceFields={this.state.experienceFields}
         />
