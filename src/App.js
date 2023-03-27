@@ -241,6 +241,15 @@ export class App extends Component {
           educationalFields={this.state.educationalFields}
           experienceFields={this.state.experienceFields}
         />
+
+        <button
+          className="print-btn clickable"
+          onClick={() => {
+            window.print();
+          }}
+        >
+          <i className="fa-solid fa-print"></i>
+        </button>
       </>
     );
   }

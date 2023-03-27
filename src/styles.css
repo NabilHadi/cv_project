@@ -48,6 +48,26 @@ body {
   background-color: var(--scondary-color);
 }
 
+.print-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: var(--scondary-color);
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+  color: var(--neutral-color);
+  border: none;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  opacity: 0.8;
+}
+
 ul {
   list-style: none;
 }
