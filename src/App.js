@@ -114,10 +114,12 @@ export class App extends Component {
     });
   }
 
-  createEducationalFields(
-    { schoolName = "", degreeName = "", startDate = "", endDate = "" },
-    index
-  ) {
+  createEducationalFields({
+    schoolName = "",
+    degreeName = "",
+    startDate = "",
+    endDate = "",
+  } = {}) {
     return {
       id: index,
       fields: [
@@ -155,7 +157,7 @@ export class App extends Component {
     description = "",
     startDate = "",
     endDate = "",
-  }) {
+  } = {}) {
     return {
       id: this.counter++,
       companyNameField: companyName,
@@ -235,8 +237,14 @@ export class App extends Component {
           changePersonalDetails={this.changePersonalDetails}
           educationalFields={this.state.educationalFields}
           changeEducationalFields={this.changeEducationalFields}
+          addEducationalFields={() => {
+            this.addEducationalFields(this.createEducationalFields());
+          }}
           experienceFields={this.state.experienceFields}
           changeExperienceFields={this.changeExperienceFields}
+          addExperienceFields={() => {
+            this.addExperienceFields(this.createExperienceFields());
+          }}
         />
 
         <CV

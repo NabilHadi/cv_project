@@ -117,11 +117,17 @@ export class Form extends Component {
         <fieldset>
           <legend>Educational Details</legend>
           {this.props.educationalFields.map(this.composeEducationFields)}
+          <button onClick={this.props.addEducationalFields} type="button">
+            Add New Education
+          </button>
         </fieldset>
 
         <fieldset>
           <legend>Experience Details</legend>
           {this.props.experienceFields.map(this.composeExperienceFields)}
+          <button onClick={this.props.addExperienceFields} type="button">
+            Add New Experience
+          </button>
         </fieldset>
       </form>
     );
