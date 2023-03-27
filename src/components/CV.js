@@ -31,6 +31,18 @@ export class CV extends Component {
                 {this.props.phoneNumberField.value}
               </p>
             </div>
+            <div>
+              <h3 className="dot">Skills</h3>
+              <ul className="cv__view__skills__ul">
+                {this.props.personalDetailsFields.skills.map((skill, index) => {
+                  return (
+                    <li key={index} className="sm-dot">
+                      {skill}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
         </section>
         <section className="cv__view__right-column">

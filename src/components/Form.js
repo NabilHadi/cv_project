@@ -95,6 +95,15 @@ export class Form extends Component {
   }
 
   render() {
+    const {
+      nameField,
+      currentJobField,
+      emailField,
+      phoneNumberField,
+      aboutField,
+      skills,
+    } = this.props.personalDetailsFields;
+
     return (
       <form className="cv__form">
         <fieldset>
@@ -146,6 +155,16 @@ export class Form extends Component {
             inputName="about-input"
             value={aboutField}
             onInputChange={this.props.changePersonalDetails}
+          />
+          <FormField
+            id="skillsInput"
+            label="Enter your skills seprated by New Line ( enter )"
+            type="textarea"
+            inputName="skillsInput"
+            value={skills.join("\n")}
+            onInputChange={(id, value) => {
+              this.props.changeSkills(value);
+            }}
           />
         </fieldset>
 

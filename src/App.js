@@ -28,6 +28,7 @@ export class App extends Component {
         phoneNumberField: "+123 12345",
         aboutField:
           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis soluta obcaecati sint officiis fuga quia sapiente rerum eius enim? Veniam.",
+        skills: ["HTML", "CSS", "ReactJS", "English", "Arabic"],
       },
       educationalFields: [
         this.createEducationalFields(
@@ -75,6 +76,17 @@ export class App extends Component {
     this.addEducationalFields = this.addEducationalFields.bind(this);
     this.addExperienceFields = this.addExperienceFields.bind(this);
     this.onImageChange = this.onImageChange.bind(this);
+    this.changeSkills = this.changeSkills.bind(this);
+  }
+
+  changeSkills(skills = "") {
+    this.setState({
+      ...this.state,
+      personalDetailsFields: {
+        ...this.state.personalDetailsFields,
+        skills: skills.split("\n"),
+      },
+    });
   }
 
   onImageChange(e) {
@@ -229,6 +241,7 @@ export class App extends Component {
             this.addExperienceFields(this.createExperienceFields());
           }}
           onImageChange={this.onImageChange}
+          changeSkills={this.changeSkills}
         />
 
         <CV

@@ -89,7 +89,7 @@ h3.dot::before {
 }
 
 h4.sm-dot::before {
-  left: -0.4cm;
+  left: -0.43cm;
   top: 0.25cm;
 }
 
@@ -245,6 +245,11 @@ p i {
 
 div.cv__view__right__about {
   margin-top: 2.169cm;
+}
+
+.cv__view__skills__ul li::before {
+  left: -0.4cm;
+  top: 0.22cm;
 }
 
 @page {
