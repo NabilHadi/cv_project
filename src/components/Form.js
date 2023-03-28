@@ -12,24 +12,50 @@ export class Form extends Component {
   composeEducationFields({ id, fields }, index) {
     if (!fields) return;
     const onInputChange = (fieldName = "", newValue) => {
-      this.props.changeEducationalFields(id, fieldName, newValue);
+      this.props.changeEducationalFields(
+        id,
+        fieldName.slice((id + "").length),
+        newValue
+      );
     };
 
     return (
       <div key={index} className="FieldGroup">
         <h3>Education {index + 1}</h3>
-        {fields.map((field) => {
-          return (
-            <FormField
-              key={field.id}
-              id={field.id}
-              label={field.label}
-              inputName={field.name}
-              value={field.value}
-              onInputChange={onInputChange}
-            />
-          );
-        })}
+        <div key={index}>
+          <FormField
+            id={id + "schoolNameField"}
+            label={"School Name: "}
+            type="text"
+            inputName="schoolNameInput"
+            value={fields.schoolNameField}
+            onInputChange={onInputChange}
+          />
+          <FormField
+            id={id + "degreeNameField"}
+            label={"Degree Name: "}
+            type="text"
+            inputName="degreeNameInput"
+            value={fields.degreeNameField}
+            onInputChange={onInputChange}
+          />
+          <FormField
+            id={id + "eduStartDateField"}
+            label={"Start Date: "}
+            type="textarea"
+            inputName="eduStartDateInput"
+            value={fields.eduStartDateField}
+            onInputChange={onInputChange}
+          />
+          <FormField
+            id={id + "eduEndDateField"}
+            label={"End Date: "}
+            type="text"
+            inputName="eduEndDateInput"
+            value={fields.eduEndDateField}
+            onInputChange={onInputChange}
+          />
+        </div>
       </div>
     );
   }

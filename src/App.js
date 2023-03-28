@@ -116,33 +116,13 @@ export class App extends Component {
     endDate = "",
   } = {}) {
     return {
-      id: index,
-      fields: [
-        new Field({
-          id: index + "schoolNameInput",
-          label: "School Name: ",
-          type: "text",
-          value: schoolName,
-        }),
-        new Field({
-          id: index + "degreeNameInput",
-          label: "Degree Name: ",
-          type: "text",
-          value: degreeName,
-        }),
-        new Field({
-          id: index + "eduStartDateInput",
-          label: "Start Date: ",
-          type: "text",
-          value: startDate,
-        }),
-        new Field({
-          id: index + "eduEndDateInput",
-          label: "End Date: ",
-          type: "text",
-          value: endDate,
-        }),
-      ],
+      id: this.counter++,
+      fields: {
+        schoolNameField: schoolName,
+        degreeNameField: degreeName,
+        eduStartDateField: startDate,
+        eduEndDateField: endDate,
+      },
     };
   }
 
@@ -163,30 +143,26 @@ export class App extends Component {
     };
   }
 
-  changePersonalDetails(fieldId, newValue) {
-    if (
-      !findObjectInArrayWith(this.state.personalDetailsFields, {
-        id: fieldId,
-      })
-    )
-      return;
+  changePersonalDetails(fieldName, newValue) {
+    if (!this.state.personalDetailsFields.hasOwnProperty(fieldName)) return;
 
     this.setState({
       ...this.state,
-      personalDetailsFields: this.state.personalDetailsFields.map((field) => {
-        if (field.id === fieldId) {
-          return new Field({ ...field, value: newValue });
-        }
-        return field;
-      }),
+      personalDetailsFields: {
+        ...this.state.personalDetailsFields,
+        [fieldName]: newValue,
+      },
     });
   }
 
-  changeEducationalFields(fieldGroupId, fieldId, newValue) {
-    if (
-      !findObjectInArrayWith(this.state.educationalFields, { id: fieldGroupId })
-    )
-      return;
+  changeEducationalFields(fieldGroupId, fieldName, newValue) {
+    const foundFieldGroup = findObjectInArrayWith(
+      this.state.educationalFields,
+      {
+        id: fieldGroupId,
+      }
+    );
+    if (!foundFieldGroup && !foundFieldGroup.hasOwnProperty(fieldName)) return;
 
     this.setState({
       ...this.state,
@@ -194,12 +170,10 @@ export class App extends Component {
         if (fieldGroup.id === fieldGroupId) {
           return {
             ...fieldGroup,
-            fields: fieldGroup.fields.map((field) => {
-              if (field.id === fieldId) {
-                return new Field({ ...field, value: newValue });
-              }
-              return field;
-            }),
+            fields: {
+              ...fieldGroup.fields,
+              [fieldName]: newValue,
+            },
           };
         }
         return fieldGroup;
@@ -246,11 +220,6 @@ export class App extends Component {
 
         <CV
           personalDetailsFields={this.state.personalDetailsFields}
-          nameField={this.state.personalDetailsFields[0]}
-          currentJobField={this.state.personalDetailsFields[1]}
-          emailField={this.state.personalDetailsFields[2]}
-          phoneNumberField={this.state.personalDetailsFields[3]}
-          aboutField={this.state.personalDetailsFields[4]}
           educationalFields={this.state.educationalFields}
           experienceFields={this.state.experienceFields}
         />
