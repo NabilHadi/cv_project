@@ -2,18 +2,6 @@ import React, { Component } from "react";
 import CV from "./components/CV";
 import Form from "./components/Form";
 import { findObjectInArrayWith } from "./utils";
-
-class Field {
-  constructor({ id, name, label, type, value, isTextArea }) {
-    this.id = id;
-    this.name = name ?? this.id;
-    this.label = label;
-    this.type = type;
-    this.value = value;
-    this.isTextArea = isTextArea ?? false;
-  }
-}
-
 export class App extends Component {
   constructor(props) {
     super(props);
